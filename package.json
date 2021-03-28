@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "index.js",
-    "dev": "nodemon index.js"
+    "client": "npm run start --prefix client",
+    "dev": "concurrently \"npm run client\" \"nodemon index.js\""
   },
   "author": "",
   "license": "ISC",
