@@ -13,6 +13,7 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -79,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function Header() {
+function Header(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -103,6 +104,42 @@ export default function Header() {
     const handleMobileMenuOpen = (event) => {
         setMobileMoreAnchorEl(event.currentTarget);
     };
+
+
+    const UserConnect = () => {
+        console.log("USER CONNECT", props)
+        switch (props.user) {
+            case null:
+                return <li><a href="/">LOADING</a></li>
+            case false:
+                return (
+                    <>
+                        <IconButton aria-label="show 4 new mails" color="inherit">
+                            <NavLink to="/signup">
+                                <Typography variant="h6" color="initial">Signup</Typography>
+                            </NavLink>
+                        </IconButton>
+                    </>
+                )
+            default:
+                return (
+                    <>
+                        <IconButton aria-label="show 4 new mails" color="inherit">
+                            <NavLink to="/profile">
+                                <Typography variant="h6" color="initial">Profile</Typography>
+                            </NavLink>
+                        </IconButton>
+
+                        <IconButton aria-label="show 17 new notifications" color="inherit">
+                            <NavLink to="/logout">
+                                <Typography variant="h6" color="initial">Logout</Typography>
+                            </NavLink>
+
+                        </IconButton>
+                    </>
+                )
+        }
+    }
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -176,23 +213,34 @@ export default function Header() {
                     <NavLink to="/">
                         <Typography className={classes.title} variant="h6" noWrap>
                             Material-UI
-          </Typography>
+                        </Typography>
                     </NavLink>
 
 
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
-                        <IconButton aria-label="show 4 new mails" color="inherit">
+                        {/* <IconButton aria-label="show 4 new mails" color="inherit">
                             <NavLink to="/signup">
                                 <Typography variant="h6" color="initial">Signup</Typography>
                             </NavLink>
                         </IconButton>
+
+                        <IconButton aria-label="show 4 new mails" color="inherit">
+                            <NavLink to="/profile">
+                                <Typography variant="h6" color="initial">Profile</Typography>
+                            </NavLink>
+                        </IconButton>
+
                         <IconButton aria-label="show 17 new notifications" color="inherit">
                             <NavLink to="/logout">
                                 <Typography variant="h6" color="initial">Logout</Typography>
                             </NavLink>
 
-                        </IconButton>
+                        </IconButton> */}
+
+
+                        {UserConnect()}
+
                         <IconButton
                             edge="end"
                             aria-label="account of current user"
@@ -222,3 +270,11 @@ export default function Header() {
         </div>
     );
 }
+
+const mapStateToProps = (state) => {
+    return {
+        user: state.auth
+    }
+}
+
+export default connect(mapStateToProps)(Header)
