@@ -18,7 +18,8 @@ passport.deserializeUser((id, done) => {
 passport.use(new GoogleStrategy({
     clientID: key.GOOGLE_ClientID,
     clientSecret: key.GOOGLE_SECRET_KEY,
-    callbackURL: "/auth/google/callback"
+    callbackURL: "/auth/google/callback",
+    proxy: true
 },
     function (accessToken, refreshToken, profile, cb) {
         console.log("Access Token", accessToken)
@@ -32,7 +33,12 @@ passport.use(new GoogleStrategy({
                     cb(null, existing)
                 }
                 else {
-                    new User({ googleId: profile.id }).save()
+                    new User(
+                        {
+                            googleId: profile.id,
+                            username: profile.displayName,
+                            picture: profile._json.picture
+                        }).save()
                         .then((user) => { cb(null, user) })
                 }
             })

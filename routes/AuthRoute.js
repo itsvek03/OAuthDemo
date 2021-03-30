@@ -4,16 +4,13 @@ module.exports = (app) => {
     app.get('/auth/google', passport.authenticate('google', {
         scope: ['profile', 'email']
     }))
-
     app.get("/auth/google/callback", passport.authenticate('google'), (req, res) => {
-        res.redirect('/profile')
+        res.redirect('http://localhost:3000/profile')
     })
-
-
     app.get('/user', (req, res) => { res.send(req.user) })
     app.get('/logout', (req, res) => {
-        req.logout()
-        res.redirect('/')
+        req.logout();
+        res.redirect('http://localhost:3000/');
     })
 }
 

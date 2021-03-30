@@ -1,9 +1,22 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
-export default function Profile() {
+function Profile(props) {
+    // if (!props.user) {
+    //     props.history.push('/')
+    // }
     return (
         <>
-            <h1>This is the Profile Page</h1>
+            <h1>You Google ID is</h1>
         </>
     );
 }
+
+
+
+const mapStateToProps = (state) => {
+    console.log("STATE PROFILE", state)
+    return {}
+}
+
+export default connect(mapStateToProps)(Profile)

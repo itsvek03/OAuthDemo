@@ -10,7 +10,7 @@ import { fetchUserAction } from './actions/user.action'
 function App(props) {
   useEffect(() => {
     props.user()
-  }, [props])
+  })
 
   return (
     <BrowserRouter>

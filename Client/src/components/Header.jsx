@@ -131,9 +131,11 @@ function Header(props) {
                         </IconButton>
 
                         <IconButton aria-label="show 17 new notifications" color="inherit">
-                            <NavLink to="/logout">
+                            <a
+                                href="http://localhost:5000/logout"
+                            >
                                 <Typography variant="h6" color="initial">Logout</Typography>
-                            </NavLink>
+                            </a>
 
                         </IconButton>
                     </>
@@ -210,34 +212,15 @@ function Header(props) {
                     >
                         <MenuIcon />
                     </IconButton>
-                    <NavLink to="/">
+                    <NavLink to={props.user ? '/profile' : '/'}>
                         <Typography className={classes.title} variant="h6" noWrap>
-                            Material-UI
+                            OAuth Demo
                         </Typography>
                     </NavLink>
 
 
                     <div className={classes.grow} />
                     <div className={classes.sectionDesktop}>
-                        {/* <IconButton aria-label="show 4 new mails" color="inherit">
-                            <NavLink to="/signup">
-                                <Typography variant="h6" color="initial">Signup</Typography>
-                            </NavLink>
-                        </IconButton>
-
-                        <IconButton aria-label="show 4 new mails" color="inherit">
-                            <NavLink to="/profile">
-                                <Typography variant="h6" color="initial">Profile</Typography>
-                            </NavLink>
-                        </IconButton>
-
-                        <IconButton aria-label="show 17 new notifications" color="inherit">
-                            <NavLink to="/logout">
-                                <Typography variant="h6" color="initial">Logout</Typography>
-                            </NavLink>
-
-                        </IconButton> */}
-
 
                         {UserConnect()}
 
