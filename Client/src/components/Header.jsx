@@ -14,6 +14,7 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { Avatar } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -214,7 +215,7 @@ function Header(props) {
                     </IconButton>
                     <NavLink to={props.user ? '/profile' : '/'}>
                         <Typography className={classes.title} variant="h6" noWrap>
-                            OAuth Demo
+                            o-Auth Demo
                         </Typography>
                     </NavLink>
 
@@ -224,7 +225,7 @@ function Header(props) {
 
                         {UserConnect()}
 
-                        <IconButton
+                        {(!props.user) ? '' : <IconButton
                             edge="end"
                             aria-label="account of current user"
                             aria-controls={menuId}
@@ -232,8 +233,9 @@ function Header(props) {
                             onClick={handleProfileMenuOpen}
                             color="inherit"
                         >
-                            <AccountCircle />
-                        </IconButton>
+                            <Avatar alt="Profile" src={props.user.picture} />
+                        </IconButton>}
+
                     </div>
                     <div className={classes.sectionMobile}>
                         <IconButton
